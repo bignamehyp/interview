@@ -6,7 +6,6 @@ class Solution:
         
         dp = [ [0 for t in range(len(T))] for s in range(len(S))]
         
-        
         for t in range(len(T)):
             for s in range(t, len(S)):
                 if s != t:
@@ -16,4 +15,5 @@ class Solution:
                         dp[s][t] += dp[s-1][t-1]
                     else:
                         dp[s][t] += 1
-        return dp[len(S)-1][len(T)-1
+        return dp[len(S)-1][len(T)-1]
+        
