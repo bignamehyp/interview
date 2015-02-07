@@ -1,29 +1,24 @@
 class SubstringWithCatAllWords:
     def findSubstring(self,S,L):
-        if len(L) == 0:return range(len(S))
-        wordLen = len(L[0])
-        toFind = dict()
+        if len(S) == 0 or len(L) == 0:
+            return []
+        length = len(L[0])
+        target = {}
+        for l in L:
+            target[l] = 1 if l not in target else target[l] + 1
         solns = []
-        for word in L:
-            if not word in toFind:
-                toFind[word] = 1
-            else:
-                toFind[word] += 1
-        for i in range(len(S) - wordLen * len(L) + 1 ):
-            numMatches = 0
-            seen = dict()
-            for j in range(len(L)):
-                word =  S[i + j * wordLen: i + (j + 1) * wordLen]
-                if word in toFind:
-                    if word in seen:
-                        seen[word] += 1
-                    else:
-                        seen[word] = 1
-                    if seen[word] <= toFind[word]:
-                            numMatches+=1
-                    else:
-                        break
+        for i in range(len(S) - length * len(L) + 1):
+            founds = {}
+            found = 0
+            for k in range(len(L)):
+                candidate = S[i+k*length:i+(k+1)*length]
+                if candidate not in target:
+                    break
+                founds[candidate] = 1 if candidate not in founds else founds[candidate] + 1
+                if founds[candidate] <= target[candidate]:
+                    found += 1
                 else:
                     break
-            if numMatches == len(L):solns.append(i)
+            if found == len(L):
+                solns.append(i)
         return solns
