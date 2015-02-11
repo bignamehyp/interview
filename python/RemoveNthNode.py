@@ -1,16 +1,18 @@
 class RemoveNthNode:
-    def removeNthFromEnd(self, head,n):
+     def removeNthFromEnd(self, head, n):
+        if head == None or n == 0:
+            return head
+        i = 0
         fast = head
-        for i in range(1,n):
+        while i < n:
             fast = fast.next
-        prev = None
-        node = head
-        while fast.next:
-            prev = node
-            node = node.next
-            fast = fast.next
-        if prev == None:
+            i += 1
+        slow = head
+        if fast == None:
             return head.next
-        prev.next = node.next
-        node.next = None
+        while fast.next:
+            slow = slow.next
+            fast = fast.next
+        slow.next = slow.next.next
         return head
+    

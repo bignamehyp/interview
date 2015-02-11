@@ -1,47 +1,38 @@
 class SortList:
     def sortList(self, head):
-        if head == None or head.next == None:return head
-        fast = head
+        if head is None or head.next is None:
+            return head
         slow = head
+        fast = head
         prev = None
         while fast and fast.next:
-            fast = fast.next.next            
-            prev = slow                
+            prev = slow
             slow = slow.next
-        if prev:
-            prev.next = None
-        first = self.sortList(head)
-        second = self.sortList(slow)
-        newHead = self.merge(first, second)
-        return newHead
-        
-    def merge(self, first, second):
-        head = None
+            fast = fast.next
+            if fast:
+                fast = fast.next
+        prev.next = None
+        l = self.sortList(head)
+        r = self.sortList(slow)
+        newHead = None
         node = None
-        while first or second:
-            v1 = 1 << 32
-            v2 = 1 << 32
-            if first:
-                v1 = first.val
-            if second:
-                v2 = second.val
-            if v1 < v2:
-                if not head:
-                    head = first
-                    node = first
+        while l and r:
+            if l.val < r.val:
+                if newHead is None:
+                    newHead = l
                 else:
-                    node.next = first
-                    node = node.next
-                first = first.next
+                    node.next = l
+                node = l
+                l = l.next
             else:
-                if not head:
-                    head = second
-                    node = second
+                if newHead is None:
+                    newHead = r
                 else:
-                    node.next = second
-                    node = node.next
-                second = second.next
-        return head
-            
-                    
-        
+                    node.next = r
+                node = r
+                r = r.next
+        if l:
+            node.next = l
+        if r:
+            node.next = r
+        return newHead

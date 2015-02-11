@@ -7,7 +7,7 @@ class SearchRange:
         while l <= r:
             m = l + (r-l)/2
             if A[m] == target:
-                if m == 0 or A[m-1] != target:
+                if m == l or A[m-1] != target:
                     first = m
                     break;
                 r = m - 1
@@ -23,14 +23,14 @@ class SearchRange:
         while l <= r:
             m = l + (r - l)/2
             if A[m] == target:
-                if m == len(A) - 1 or A[m+1] != target:
+                if m == r or A[m+1] != target:
                     second = m
                     break;
                 l = m + 1
             elif A[m] > target:
                 r = m - 1
             else:
-                l = m + 1
+                l = m + 1 
          
         return [first,second]
         

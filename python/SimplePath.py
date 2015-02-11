@@ -1,15 +1,11 @@
 class SimplePath:
-    def simplifyPath(self,path):
-        dirs = path.split('/')
+    def simplifyPath(self, path):
+        subdirs = path.split('/')
         stack = []
-        for dir in dirs:
-            if len(dir) > 0:
-                if dir == ".." and len(stack) > 0:
+        for dir in subdirs:
+            if dir == '..':
+                if len(stack) > 0:
                     stack.pop()
-                elif dir != "." and dir != "..":
-                    stack.append(dir)
-        if len(stack) == 0:return "/"
-        s = ""
-        for dir in stack:
-            s += "/" + dir
-        return s
+            elif len(dir) > 0 and dir != '.':
+                stack.append(dir)
+        return '/' + '/'.join(stack)

@@ -1,14 +1,16 @@
 class RemoveDuplicatesFromSortedArray:
     def removeDuplicates(self, A):
-        pos = 0
-        length = 0
-        while pos < len(A):
-            A[length] = A[pos]
-            length += 1
-            while pos + 1 < len(A) and A[pos] == A[pos+1]:
-                pos += 1
-            pos += 1
-        return length
+        if len(A) <= 1:
+            return len(A)
+        fast = 1
+        slow = 1
+        while fast < len(A):
+            if A[fast] != A[fast-1]:
+                A[slow] = A[fast]
+                slow += 1
+            fast += 1
+        return slow
+
             
                  
         
