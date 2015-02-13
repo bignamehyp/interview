@@ -17,8 +17,8 @@ class Solution:
             r -= 1
         start = 0
         i = 0
-        while i < len(s):
-            if s[i] == ' ':
+        while i < len(s) + 1:
+            if i == len(s) or s[i] == ' ':
                 l = start
                 r = i - 1
                 while l < r:

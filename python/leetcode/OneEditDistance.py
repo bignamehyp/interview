@@ -14,6 +14,8 @@ class Solution:
         if m > n:
             return self.isOneEditDistance(t, s)
         shift = n - m
+        if shift > 1:
+            return False
         i = 0
         while i < m and s[i] == t[i]:
             i += 1

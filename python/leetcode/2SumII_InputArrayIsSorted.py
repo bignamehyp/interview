@@ -7,11 +7,12 @@ Output: index1=1, index2=2
 """
 
 class Solution:
-    def twoSum(self, numbers, target):
+    # @return a tuple, (index1, index2)
+    def twoSum(self, num, target):
         l = 0
-        r = len(numbers) - 1
+        r = len(num) - 1
         while l < r:
-            s = numbers[l] + numbers[r]
+            s = num[l] + num[r]
             if s == target:
                 return (l + 1, r + 1)
             elif s < target:
@@ -19,4 +20,3 @@ class Solution:
             else:
                 r -= 1
         return (l + 1, r + 1)
-            
