@@ -19,5 +19,21 @@ class CombSum:
                 self.dfs(solns, soln, candidates[pos:], target - num)
                 soln.pop()
             pos += 1
-        
+    def combinationSumDP(self, candidates, target):
+        candidates.sort()
+        dp = []
+        dp.append([])
+        for t in range(1, target + 1):
+            solns = []
+            for val in candidates:
+                if val > t:
+                    break
+                if val == t:
+                    solns.append([val])
+                else:
+                    for soln in dp[t-val]:
+                        if val >= soln[-1]:
+                            solns.append(soln[:] + [val])
+            dp.append(solns)
+        return dp[target]
             
